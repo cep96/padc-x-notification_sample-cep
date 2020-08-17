@@ -39,6 +39,12 @@
         android:id="@+id/btnActionNotification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Action Notification"
-        />
+        android:text="Action Notification" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnProgressNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Progress Notification"
+        android:backgroundTint="@color/colorAccent"/>
 </LinearLayout>

@@ -22,9 +22,11 @@ class MainActivity : AppCompatActivity() {
     companion object{
         const val CHANNEL_ID = "NOTIFICATION_CHANNEL"
 
-        const val notificationId = 100
-        const val notificationId02 = 101
-        const val notificationId03 = 102
+        const val notificationId = 101
+        const val notificationId02 = 102
+        const val notificationId03 = 103
+        const val notificationId04 = 104
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,6 +97,29 @@ class MainActivity : AppCompatActivity() {
         btnActionNotification.setOnClickListener {
             with(NotificationManagerCompat.from(this)){
                 notify(notificationId03, builder03.build())
+            }
+        }
+
+        /***
+         * Notification with Progress
+         */
+        val builder04 = NotificationCompat.Builder(this, CHANNEL_ID).apply {
+            setContentTitle("Video Download")
+            setContentText("Download In Progress")
+            setSmallIcon(android.R.drawable.stat_sys_download)
+        }
+
+        val PROGRESS_MAX = 100
+        val CURRENT_PROGRESS = 10
+
+        NotificationManagerCompat.from(this).apply{
+            builder04.setProgress(PROGRESS_MAX, CURRENT_PROGRESS, false)
+
+            builder04.setContentText("Download Complete")
+                .setProgress(0,0,false)
+
+            btnProgressNotification.setOnClickListener {
+                notify(notificationId04, builder04.build())
             }
         }
 
