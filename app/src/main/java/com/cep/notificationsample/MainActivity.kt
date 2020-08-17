@@ -15,6 +15,7 @@ import android.view.MenuItem
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.cep.notificationsample.activities.IntentNotificationActivity
+import com.cep.notificationsample.utils.getBitmap
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         const val notificationId02 = 102
         const val notificationId03 = 103
         const val notificationId04 = 104
+        const val notificationId05 = 105
 
     }
 
@@ -121,6 +123,27 @@ class MainActivity : AppCompatActivity() {
             btnProgressNotification.setOnClickListener {
                 notify(notificationId04, builder04.build())
             }
+        }
+
+        /***
+         * Notification with Image
+         */
+        val builder05 = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle("imageTitle")
+            .setContentText("ImageDescription")
+            .setLargeIcon(getBitmap(this, R.mipmap.ic_launcher))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setStyle(NotificationCompat.BigPictureStyle()
+                .bigPicture(getBitmap(this, R.mipmap.ic_launcher_background))
+                .bigLargeIcon(getBitmap(this, R.mipmap.ic_launcher))
+            )
+
+        btnBigImageNotification.setOnClickListener {
+            with(NotificationManagerCompat.from(this)){
+                notify(notificationId05, builder05.build())
+            }
+
         }
 
 
