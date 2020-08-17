@@ -24,5 +24,14 @@
         android:id="@+id/btnJustNotification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Just Notification"/>
+        android:text="Normal Notification"
+        android:backgroundTint="@color/colorAccent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnIntentNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Intent Notification"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/colorPrimary"/>
 </LinearLayout>

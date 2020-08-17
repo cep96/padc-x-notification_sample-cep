@@ -2,7 +2,9 @@ package com.cep.notificationsample
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -12,15 +14,17 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.cep.notificationsample.activities.IntentNotificationActivity
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
     companion object{
         const val CHANNEL_ID = "NOTIFICATION_CHANNEL"
-    }
 
-    val notificationId = 100
+        const val notificationId = 100
+        const val notificationId02 = 101
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +50,27 @@ class MainActivity : AppCompatActivity() {
         btnJustNotification.setOnClickListener {
             with(NotificationManagerCompat.from(this)){
                 notify(notificationId, builder.build())
+            }
+        }
+
+        /***
+         * Notification with intent
+         */
+        val intent = Intent(this, IntentNotificationActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this,0,intent, 0)
+
+        val builder2 = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle(textTitle)
+            .setContentText(textContent)
+            .setContentIntent(pendingIntent)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        btnIntentNotification.setOnClickListener {
+            with(NotificationManagerCompat.from(this)){
+                notify(notificationId02, builder2.build())
             }
         }
 
