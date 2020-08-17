@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         const val notificationId = 100
         const val notificationId02 = 101
+        const val notificationId03 = 102
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         /***
-         * Notification with intent
+         * Notification with Intent
          */
         val intent = Intent(this, IntentNotificationActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -74,6 +75,28 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        /***
+         * Notification with Actions
+         */
+        val intent02 = Intent(this, IntentNotificationActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+
+        val pendingIntent02: PendingIntent = PendingIntent.getActivity(this, 0, intent02, 0)
+
+        val builder03 = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle(textTitle)
+            .setContentText(textContent)
+            .setContentIntent(pendingIntent02)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .addAction(android.R.drawable.star_off, "Snooze", pendingIntent02)
+
+        btnActionNotification.setOnClickListener {
+            with(NotificationManagerCompat.from(this)){
+                notify(notificationId03, builder03.build())
+            }
+        }
 
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
