@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.cep.notificationsample.activities.IntentNotificationActivity
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         const val notificationId03 = 103
         const val notificationId04 = 104
         const val notificationId05 = 105
+        const val notificationId06 = 106
 
     }
 
@@ -146,6 +148,23 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        /***
+         * Custom Notification
+         */
+        val notificationLayout = RemoteViews(packageName, R.layout.notification_layout)
+
+        val customNotification = NotificationCompat.Builder(this, CHANNEL_ID).apply {
+            setSmallIcon(R.mipmap.ic_launcher)
+//            setStyle(NotificationCompat.DecoratedCustomViewStyle())
+//            setCustomContentView(notificationLayout)
+            setCustomBigContentView(notificationLayout)
+        }
+
+        btnCustomNoti.setOnClickListener {
+            with(NotificationManagerCompat.from(this)){
+                notify(notificationId06, customNotification.build())
+            }
+        }
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)

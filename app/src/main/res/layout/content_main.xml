@@ -53,4 +53,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Image Notification" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCustomNoti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Custom Notification"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/colorPrimary"/>
+
+
 </LinearLayout>
